@@ -84,8 +84,12 @@ function acronymize(str) {
     for (let i = 0; i < str.length; i++) {
         if(str[i] == " ")
         {
-            let tempLetter = str[i + 1]
-            acronyme += tempLetter
+            if(str[i+1] != null)
+            {
+                let tempLetter = str[i + 1]
+                acronyme += tempLetter
+            }
+
         }
         
     }
