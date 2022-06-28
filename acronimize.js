@@ -79,4 +79,18 @@ const expected7 = "LFNYISN";
  * @param {string} str A string to be turned into an acronym.
  * @returns {string} The given str converted into an acronym.
  */
-function acronymize(str) {}
+function acronymize(str) {
+    let acronyme = ""
+    for (let i = 0; i < str.length; i++) {
+        if(str[i] == " ")
+        {
+            let tempLetter = str[i + 1]
+            acronyme += tempLetter
+        }
+        
+    }
+    console.log(acronyme.toUpperCase())
+}
+
+acronymize(str1)
+acronymize(str2)
