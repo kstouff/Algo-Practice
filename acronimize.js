@@ -34,8 +34,25 @@ const expected5 = "";
  * @returns {string} The given array items as a string separated by the given separator.
  */
 function join(arr, separator) {
+    result = ""
+    for (let i = 0; i < arr.length; i++) {
+        let tempLetter = arr[i];
+        result += tempLetter
+        if(i < arr.length - 1)
+        {
+            result += separator
+        }       
+    }
+    console.log(result)
     
 }
+
+join(arr1, separator1)
+join(arr2, separator2)
+join(arr3, separator3)
+join(arr4, separator4)
+join(arr5, separator5)
+
 
 
 
