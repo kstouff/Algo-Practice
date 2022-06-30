@@ -38,11 +38,23 @@ to the original position.
  * @returns {string} The string rotated by the given amount.
  */
 function rotateStr(str, amnt) {
-    let newStr = ""
-    for (let i = 0; i <= amnt; i++) {
-        const element = str[i];
-
-
-        
+    let result = ""
+    tempStr = ""
+    let newStr = str
+    num = amnt%str.length
+    for (let i = newStr.length -1; i >= newStr.length -1 - num; i--) {
+        const element = newStr[i];
+        tempStr += element
+        newStr.slice(i, i -1)     
     }
+
+    
+    console.log(tempStr)
+    console.log(newStr)
 }
+
+rotateStr(str, rotateAmnt1)
+rotateStr(str, rotateAmnt2)
+rotateStr(str, rotateAmnt3)
+rotateStr(str, rotateAmnt4)
+rotateStr(str, rotateAmnt5)
