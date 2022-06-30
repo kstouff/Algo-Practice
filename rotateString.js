@@ -39,7 +39,8 @@ to the original position.
  */
 function rotateStr(str, amnt) {
     let result = ""
-    tempStr = ""
+
+    let tempStr = ""
     let newStr = str
     num = amnt%str.length
     for (let i = newStr.length -1; i >= newStr.length -1 - num; i--) {
