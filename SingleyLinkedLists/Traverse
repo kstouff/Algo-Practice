@@ -235,31 +235,32 @@ class SinglyLinkedList {
    * @returns {SinglyLinkedList} This list.
    */
   moveMinToFront() {
-    if (this.isEmpty()) {
-      return this;
+    if(this.isEmpty || this.head.next === null)
+    {
+        return this
     }
-
-    let minNode = this.head;
-    let runner = this.head;
-    let prev = this.head;
-
-    while (runner.next) {
-      if (runner.next.data < minNode.data) {
-        prev = runner;
-        minNode = runner.next;
-      }
-
-      runner = runner.next;
+    let runner = this.head
+    let minNode = this.head 
+    let previous = this.head
+    while(runner.next)
+    {
+        if(runner.next.data < minNode.data)
+        {
+            previous = runner
+            minNode = runner.next
+        }
+        runner = runner.next
     }
-
-    if (minNode === this.head) {
-      return this;
+    if(minNode === this.head)
+    {
+        return this
     }
+    previous.next = minNode.next
+    minNode.next = this.head
+    this.head = minNode
 
-    prev.next = minNode.next;
-    minNode.next = this.head;
-    this.head = minNode;
-    return this;
+    return this
+
   }
 
   /**
@@ -270,17 +271,22 @@ class SinglyLinkedList {
    *    second to last node.
    */
   secondToLast() {
-    if (!this.head || !this.head.next) {
-      return null;
+    if(this.isEmpty())
+    {
+        return null
+    }
+    if(this.head.next === null)
+    {
+        return null
     }
 
     // There are at least 2 nodes since the above return hasn't happened.
-    let runner = this.head;
-
-    while (runner.next.next) {
-      runner = runner.next;
+    let runner = this.head
+    while(runner.next.next)
+    {
+        runner = runner.next
     }
-    return runner.data;
+    return runner.data
   }
 
   /**
@@ -292,7 +298,7 @@ class SinglyLinkedList {
    *    node to be removed.
    * @returns {boolean} Indicates if a node was removed or not.
    */
-  removeVal(val) {
+    removeVal(val) {
     if (this.isEmpty()) {
       return false;
     }
@@ -321,26 +327,23 @@ class SinglyLinkedList {
    * @returns {any} The data from the node that was removed.
    */
   removeBack() {
-    if (this.isEmpty()) {
-      return null;
+    if(this.isEmpty())
+    {
+        return null
     }
-
-    // Only 1 node.
-    if (this.head.next === null) {
-      return this.removeHead();
+    if(this.head.next === null)
+    {
+        
+        return this.removeHead()
     }
-
-    // More than 1 node.
-    let runner = this.head;
-
-    while (runner.next.next) {
-      runner = runner.next;
+    let runner = this.head
+    while(runner.next.next)
+    {
+        runner = runner.next
     }
-
-    // after while loop finishes, runner is now at 2nd to last node
-    const removedData = runner.next.data;
-    runner.next = null; // remove it from list
-    return removedData;
+    const removedData = runner.next.data
+    runner.next = null
+    return removedData
   }
 
   /**
@@ -381,15 +384,20 @@ class SinglyLinkedList {
    * @returns {boolean}
    */
   contains(val) {
-    let runner = this.head;
-
-    while (runner) {
-      if (runner.data === val) {
-        return true;
-      }
-      runner = runner.next;
+    if(this.isEmpty())
+    {
+        return false
     }
-    return false;
+    let runner = this.head
+    while (runner.next !== null)
+    {
+        if(runner.data === val)
+        {
+            return true
+        }
+        runner = runner.next
+    }
+    return false
   }
 
   /**
@@ -402,13 +410,16 @@ class SinglyLinkedList {
    * @returns {boolean}
    */
   containsRecursive(val, current = this.head) {
-    if (current === null) {
-      return false;
+    if(current === null)
+    {
+        return false
     }
-    if (current.data === val) {
-      return true;
+    if(current.data === val)
+    {
+        return true
     }
-    return this.containsRecursive(val, current.next);
+    return this.containsRecursive(val, current.next)
+    
   }
 
   /**
@@ -444,7 +455,7 @@ class SinglyLinkedList {
     }
     const oldHead = this.head
     this.head = oldHead.next
-    return this
+    return this.data
 
 
   }
@@ -589,9 +600,10 @@ const firstThreeList = new SinglyLinkedList()
   .insertAtBackRecursive(1)
   .insertAtBackRecursive(2)
   .insertAtBackRecursive(3)
-  .removeHead()
   .insertAtFront(4)
-  .average()
+  .insertAtBack(5)
+  .moveMinFront()
+  .toArr()
 // const secondThreeList = new SinglyLinkedList().insertAtBackMany([4, 5, 6]);
 // const unorderedList = new SinglyLinkedList().insertAtBackMany([
 //   -5, -10, 4, -3, 6, 1, -7, -2,
