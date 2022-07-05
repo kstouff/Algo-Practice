@@ -65,3 +65,32 @@ const newInv1 = [
   }
 
   console.log(updateInventory(newInv3, currInv3))
+
+
+
+[Unit]
+Description=Gunicorn instance
+After=network.target
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/MorningSparrow-Trading
+Environment="PATH=/home/ubuntu/MorningSparrow-Trading/venv/bin"
+ExecStart=/home/ubuntu/MorningSparrow-Trading/venv/bin/gunicorn --workers 3 --bind unix:Trading.sock -m 007 wsgi:application
+[Install]
+WantedBy=multi-user.target
+
+sudo vim /etc/nginx/sites-available/MorningSparrow-Trading
+
+server {
+        listen 80;
+        server_name 2600:6c52:7b00:c6ab:9146:dae5:d026:65a;
+        location / {
+            include proxy_params;
+            proxy_pass http://unix:/home/ubuntu/MorningSparrow-Trading/Trading.sock;
+        }
+    }
+
+sudo ln -s /etc/nginx/sites-available/Trading/etc/nginx/sites-enabled
+    
+    
