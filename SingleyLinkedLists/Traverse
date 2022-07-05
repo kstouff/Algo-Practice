@@ -421,9 +421,14 @@ class SinglyLinkedList {
    */
   insertAtFront(data) {
     const newHead = new ListNode(data);
-    newHead.next = this.head;
-    this.head = newHead;
-    return this;
+    if(this.isEmpty())
+    {
+        this.head = newHead
+    }
+    newHead.next = this.head
+    this.head = newHead
+    return this
+
   }
 
   /**
@@ -433,13 +438,15 @@ class SinglyLinkedList {
    * @returns {any} The data from the removed node.
    */
   removeHead() {
-    if (this.isEmpty()) {
-      return null;
+    if(this.isEmpty())
+    {
+        return null
     }
+    const oldHead = this.head
+    this.head = oldHead.next
+    return this
 
-    const oldHead = this.head;
-    this.head = oldHead.next;
-    return oldHead.data;
+
   }
 
   /**
@@ -449,15 +456,17 @@ class SinglyLinkedList {
    * @returns {number|NaN} The average of the node's data.
    */
   average() {
-    let runner = this.head;
     let sum = 0;
-    let cnt = 0;
-
-    while (runner) {
-      cnt++;
-      sum += runner.data;
-      runner = runner.next;
+    let count = 0;
+    let runner = this.head
+    while(runner.next !== null)
+    {
+        sum += runner.data
+        count ++
+        runner = runner.next
     }
+    return sum/count
+    
 
     /**
      * Dividing by 0 will give you NaN (Not a Number), so an empty list
@@ -466,7 +475,7 @@ class SinglyLinkedList {
      * it could be misleading to return 0 since 0 is the average of any
      * list with a sum of 0 (due to negatives or all zeros).
      */
-    return sum / cnt;
+
   }
 
   /**
@@ -579,7 +588,10 @@ const biNodeList = new SinglyLinkedList().insertAtBackMany([1, 2]);
 const firstThreeList = new SinglyLinkedList()
   .insertAtBackRecursive(1)
   .insertAtBackRecursive(2)
-  .insertAtBackRecursive(3);
+  .insertAtBackRecursive(3)
+  .removeHead()
+  .insertAtFront(4)
+  .average()
 // const secondThreeList = new SinglyLinkedList().insertAtBackMany([4, 5, 6]);
 // const unorderedList = new SinglyLinkedList().insertAtBackMany([
 //   -5, -10, 4, -3, 6, 1, -7, -2,
@@ -598,4 +610,4 @@ const firstThreeList = new SinglyLinkedList()
 // ]);
 
 // Print your list like so:
-console.log(biNodeList.toArr());
+let list = console.log(firstThreeList);
