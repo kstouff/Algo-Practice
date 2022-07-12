@@ -40,7 +40,8 @@ function gradingStudents(grades) {
             {
                 console.log(grades[i])
                 console.log(grades[i]%5)
-                newGrades.push(grades[i] + grades[i]%5 -1)
+                let newGrade = Math.round((grades[i]/5))
+                newGrades.push(newGrade * 5)
             }
             else{
                 newGrades.push(grades[i])
